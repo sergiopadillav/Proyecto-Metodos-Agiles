@@ -1,0 +1,83 @@
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-4">
+            <form #employeeForm="ngForm" (ngSubmit)="postEmployee(employeeForm)">
+
+                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)] = "employeeService.selectedEmployee._id">
+
+                <div class="form-group">
+                    <input type="text" name="first_name" #first_name="ngModel" [(ngModel)]="employeeService.selectedEmployee.first_name" max="35" class="form-control"
+                        id="exampleFormControlInput1" placeholder="Nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="second_name" max="35" class="form-control"
+                        id="exampleFormControlInput1" #second_name="ngModel" [(ngModel)]="employeeService.selectedEmployee.second_name" placeholder="Apellido" required>
+                </div>
+
+                <div class="form-group">
+                        <input type="date" name="dateJob" class="form-control"
+                            id="exampleFormControlInput1" #dateJob="ngModel" [(ngModel)]="employeeService.selectedEmployee.dateJob" placeholder="Fecha" required>
+                    </div>
+
+                <div class="form-group">
+                    <select class="form-control" placeholder="Genero" ngModel name="gender"
+                        id="exampleFormControlSelect1" #gender="ngModel" [(ngModel)]="employeeService.selectedEmployee.gender" required>
+                        <option>H</option>
+                        <option>M</option>
+                        <option>+</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" name="email"  max="50" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Correo" #email="ngModel" [(ngModel)]="employeeService.selectedEmployee.email" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" name="phone"  max="10" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Telefono" #phone="ngModel" [(ngModel)]="employeeService.selectedEmployee.phone" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="rfc" class="form-control" id="exampleFormControlInput1"
+                        placeholder="RFC" #rfc="ngModel" [(ngModel)]="employeeService.selectedEmployee.rfc" required>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" (click)="resetForm(employeeForm)" data-dismiss="modal">Limpiar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-8">
+<!--
+<form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                      </form>
+-->
+                
+                      
+            <table class="table table-hover mt-4">
+                <thead>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">RFC</th>
+                    <th scope="col">Editar</th>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let employee of employeeService.employees">
+                        <td> {{ employee.first_name}} {{ employee.second_name}}</td>
+                        <td> {{ employee.email}}</td>
+                        <td> {{ employee.rfc}}</td>
+                        <td><a (click)="editEmployee(employee)"><i class="material-icons">edit</i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
